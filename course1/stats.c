@@ -15,7 +15,7 @@
  * <Add Extended Description Here>
  *
  * @author Anas Bouhemhem
- * @date <test date >
+ * @date <17-08-2025>
  *
  */
 
@@ -27,6 +27,58 @@
 /* Size of the Data Set */
 #define SIZE (40)
 
+
+
+void printarray(unsigned char array[], int size){
+  
+  for (int i = 0; i < size; i++){
+      printf("%d ", array[i]);
+  }
+}
+
+void sort_array(unsigned char array[], int size){
+  /* Bubble-Sorting first */
+  
+  for (int i = 0; i < size - 1; i++){ 
+    for (int j = 0; j < size - 1; j++)
+    {
+      if (array[j] < array[j+1])
+      {
+        char temp = array[j];
+        array[j] = array[j+1];
+        array[j+1] = temp;
+      }
+    }
+  }
+}
+
+void find_mean(unsigned char array[], int size){
+  
+  int avg = 0;
+  for(int i = 0; i < size; i++){
+    avg += array[i];
+  }
+  avg = avg / size;
+  printf("Mean = %d", avg);
+}
+
+void find_median(unsigned char array[], int size){
+  
+  int median = 0;
+  sort_array(array, size);
+  
+  if (SIZE % 2 == 0){
+  median = (array[(size) / 2] + array[(size+1) / 2]) / 2;
+  }
+
+  else {
+    median = array[(size) / 2];
+  }
+  
+  printf("\nMedian = %d", median);
+
+}
+
 void main() {
 
   unsigned char test[SIZE] = { 34, 201, 190, 154,   8, 194,   2,   6,
@@ -36,53 +88,20 @@ void main() {
                                 7,  87, 250, 230,  99,   3, 100,  90};
 
   /* Other Variable Declarations Go Here */
+
+  printarray(test, SIZE);
+  printf("\n ");
+  printf("After sorting :\n ");
+  sort_array(test, SIZE);
+  printarray(test, SIZE);
+
+
   /* Statistics and Printing Functions Go Here */
   
-  /* Bubble-Sorting first */
-  
-  for (int i = 0; i < SIZE - 1; i++){ 
-    for (int j = 0; j < SIZE - 1; j++)
-    {
-      if (test[j] > test[j+1])
-      {
-        char temp = test[j];
-        test[j] = test[j+1];
-        test[j+1] = temp;
-      }
-    }
-  }
-
-  printf("test\n");
-  
-//  for(int i = 0; i < SIZE - 1; i++){
-//    printf("%c%d%e", test[i],test[i],test[i]);
-//  }
-    
-
-  /* Average */
-  int avg = 0, med = 0;
-  for (int i = 0; i < SIZE; i++){
-    avg += test[i];
-  }
-  avg = avg / SIZE;
-
-  /* Median */
-
-  if (SIZE % 2 == 0){
-    med = (test[(SIZE) / 2] + test[(SIZE+1) / 2]) / 2;
-  }
-
-  else {
-    med = test[(SIZE) / 2];
-  }
+  find_mean(test,SIZE);
+  find_median(test,SIZE);
 
 
-  /* Print */
-
-  printf("avg = %d\n", avg);
-  printf("med = %d\n", med);
-  printf("min = %d\n", test[0]);
-  printf("max = %d\n", test[SIZE - 1]);
 
   return 0;
 }
