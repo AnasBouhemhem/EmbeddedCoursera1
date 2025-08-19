@@ -52,17 +52,17 @@ void sort_array(unsigned char array[], int size){
   }
 }
 
-void find_mean(unsigned char array[], int size){
+unsigned char find_mean(unsigned char array[], int size){
   
   int avg = 0;
   for(int i = 0; i < size; i++){
     avg += array[i];
   }
   avg = avg / size;
-  printf("Mean = %d", avg);
+  return avg;
 }
 
-void find_median(unsigned char array[], int size){
+unsigned char find_median(unsigned char array[], int size){
   
   int median = 0;
   sort_array(array, size);
@@ -70,14 +70,58 @@ void find_median(unsigned char array[], int size){
   if (SIZE % 2 == 0){
   median = (array[(size) / 2] + array[(size+1) / 2]) / 2;
   }
-
   else {
     median = array[(size) / 2];
   }
   
-  printf("\nMedian = %d", median);
+  return median;
 
 }
+
+unsigned char find_maximum(unsigned char array[], int size){
+  
+  sort_array(array, size);
+  return array[0];
+}
+
+unsigned char find_minimum(unsigned char array[], int size){
+  
+  sort_array(array, size);
+  return array[size-1];
+}
+
+void print_statistics(unsigned char array[], int size){
+  
+  unsigned char min = 0;
+  unsigned char max = 0;
+  int avg = 0;
+  int median = 0;
+
+  sort_array(array, size);
+  
+  min = array[size-1];
+  max = array[0];
+
+  
+  for(int i = 0; i < size; i++){
+    avg += array[i];
+  }
+  avg = avg / size;
+  
+  if (SIZE % 2 == 0){
+  median = (array[(size) / 2] + array[(size+1) / 2]) / 2;
+  }
+  else {
+    median = array[(size) / 2];
+  }
+  
+  printf("\nMin = %d\n", min);
+  printf("Max = %d\n", max);
+  printf("Mean = %d", avg);
+  printf("\nMedian = %d\n", median);
+
+}
+
 
 void main() {
 
@@ -89,19 +133,20 @@ void main() {
 
   /* Other Variable Declarations Go Here */
 
-  printarray(test, SIZE);
-  printf("\n ");
-  printf("After sorting :\n ");
-  sort_array(test, SIZE);
-  printarray(test, SIZE);
-
 
   /* Statistics and Printing Functions Go Here */
   
-  find_mean(test,SIZE);
-  find_median(test,SIZE);
+  unsigned char med = find_median(test,SIZE);
+  unsigned char avg = find_mean(test,SIZE);
+  unsigned char max = find_maximum(test,SIZE);
+  unsigned char min = find_minimum(test,SIZE);
 
+  printf("\n%d", med);
+  printf("\n%d", avg);
+  printf("\n%d", max);
+  printf("\n%d", min);
 
+  print_statistics(test,SIZE);
 
   return 0;
 }
